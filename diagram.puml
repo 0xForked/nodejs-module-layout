@@ -1,0 +1,20 @@
+@startuml flow-diagram
+    index.js -> "http/handlers": new request by route
+
+    "http/handlers" -> "http/requests": validate form data
+    "http/requests" -> "http/handlers": validation callback
+
+    "http/handlers" -> index.js: IF: Validation Error \n[422] Unprocessable entity/\n[400] Bad Request
+
+    "http/handlers" -> services: IF: Validation Success \nCall Service/Use Case Business Logic
+
+    services -> "data/sources": Query data
+    
+    "data/models" <-> "data/sources": Map/Transform
+    
+    "data/sources" -> services: Process data (cache etc.)
+    
+    services -> "http/handlers":  Return data
+ 
+    "http/handlers" -> index.js: Retrun response \n[200] OK/ \n[201] CREATED/ \n[204] NO CONTENT/
+@enduml

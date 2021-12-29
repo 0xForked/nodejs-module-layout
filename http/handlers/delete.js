@@ -1,0 +1,1 @@
+// delete selected data (trash/permanent)

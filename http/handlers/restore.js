@@ -1,0 +1,1 @@
+// restore selected trash data
